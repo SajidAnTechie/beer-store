@@ -2,7 +2,7 @@ import { Box, Grid, Paper } from "@mui/material";
 import "react-loading-skeleton/dist/skeleton.css";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 
-function BeerListLoader() {
+const BeerListLoader = () => {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <Grid container spacing={4}>
@@ -16,6 +16,6 @@ function BeerListLoader() {
       </Grid>
     </Box>
   );
-}
+};
 
 export default BeerListLoader;

@@ -2,22 +2,32 @@ import { useState } from "react";
 import { Tab, Tabs, Button } from "@mui/material";
 import TabContent from "./components/tabs/TabContent";
 import { ALL_BEERS, MY_BEERS } from "./constants/appConstants";
-function MainComponent() {
-  const [activeTab, setTabValue] = useState(ALL_BEERS);
+const MainComponent = () => {
+  const [activeTab, setActiveTab] = useState(ALL_BEERS);
+  const [isModelOpen, setModelOpen] = useState(false);
 
-  const handleChange = (newValue) => {
-    setTabValue(newValue);
+  const handleOpenModel = () => {
+    setModelOpen(true);
   };
+
+  const handleCloseModel = () => {
+    setModelOpen(false);
+  };
+
+  const handleChange = (_, newValue) => {
+    setActiveTab(newValue);
+  };
+
   return (
     <>
-      <div className="tab-menu">
+      <div className="d-flex flex-row flex-between align-items-center">
         <div>
           <Tabs
             indicatorColor="primary"
             TabIndicatorProps={{ style: { bottom: 0, borderTop: "none" } }}
             textColor="inherit"
             value={activeTab}
-            onChange={(_event, newValue) => handleChange(newValue)}
+            onChange={handleChange}
           >
             <Tab
               label="All Beers"
@@ -44,16 +54,20 @@ function MainComponent() {
               color="primary"
               size="medium"
               className="mr-2"
-              onClick={() => console.log("Hello world")}
+              onClick={handleOpenModel}
             >
               Add a new beer
             </Button>
           </div>
         )}
       </div>
-      <TabContent CurrentTabValue={activeTab} />
+      <TabContent
+        CurrentTabValue={activeTab}
+        handleCloseModel={handleCloseModel}
+        isModelOpen={isModelOpen}
+      />
     </>
   );
-}
+};
 
 export default MainComponent;

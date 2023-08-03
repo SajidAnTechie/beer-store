@@ -9,14 +9,14 @@ import BeerListLoader from "../Loader/BeerListLoader";
 const DEFAULT_PAGE = 1;
 const PER_PAGE_SIZE = 3;
 
-function AllBeers() {
+const AllBeers = () => {
   const [beers, setBeers] = useState([]);
   const [page, setPage] = useState(DEFAULT_PAGE);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [enableLoadMore, setLoadMore] = useState(true);
 
-  async function fetchBeers(filters) {
+  const fetchBeers = async (filters) => {
     try {
       setLoading(true);
       const data = await fetchAllBeers(filters);
@@ -30,7 +30,7 @@ function AllBeers() {
     } finally {
       setLoading(false);
     }
-  }
+  };
 
   useEffect(() => {
     fetchBeers({
@@ -55,13 +55,7 @@ function AllBeers() {
       )}
 
       {!!beers.length && enableLoadMore && !error && (
-        <div
-          style={{
-            margin: "12px 12px",
-            display: "flex",
-            justifyContent: "center",
-          }}
-        >
+        <div className="text-center mt-2">
           {loading ? (
             <CircularProgress color="inherit" />
           ) : (
@@ -78,6 +72,6 @@ function AllBeers() {
       )}
     </>
   );
-}
+};
 
 export default AllBeers;

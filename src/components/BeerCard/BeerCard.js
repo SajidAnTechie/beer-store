@@ -14,12 +14,12 @@ function BeerCard({ beer }) {
     <Grid item xs={6} md={12}>
       <Item>
         <Stack
-          spacing={{ xs: 1, sm: 7 }}
+          spacing={5}
           direction="row"
           useFlexGap
           sx={{ marginLeft: "30px", color: "black", lineHeight: "22px" }}
         >
-          <div style={{ marginTop: "12px" }}>
+          <div className="mt-3">
             <img src={image_url} width={50} height={200} alt={name} />
           </div>
           <div>
