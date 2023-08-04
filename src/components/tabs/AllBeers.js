@@ -1,17 +1,17 @@
 import { useState, useEffect } from "react";
 import BeerCard from "../BeerCard/BeerCard";
 import { handleError } from "../../utils/error";
-import { fetchAllBeers } from "../../services/beer.service";
-import { Box, Grid, Button, CircularProgress } from "@mui/material";
-import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+import NotFound from "../common/notFound/notFound";
 import BeerListLoader from "../Loader/BeerListLoader";
+import { fetchAllBeers } from "../../services/beer.service";
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+import { Box, Grid, Button, CircularProgress } from "@mui/material";
 
 const DEFAULT_PAGE = 1;
-const PER_PAGE_ITEMS = 3;
+const PER_PAGE_ITEMS = 10;
 
 const AllBeers = () => {
   const [beers, setBeers] = useState([]);
-  const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(DEFAULT_PAGE);
   const [enableLoadMore, setEnableLoadMore] = useState(true);
@@ -25,8 +25,7 @@ const AllBeers = () => {
       }
       setBeers([...beers, ...data]);
     } catch (err) {
-      const error = handleError(err);
-      setError(error);
+      handleError(err);
     } finally {
       setLoading(false);
     }
@@ -37,13 +36,21 @@ const AllBeers = () => {
       page,
       per_page: PER_PAGE_ITEMS,
     });
+    // eslint-disable-next-line
   }, [page]);
   return (
     <>
       {!beers.length && loading ? (
         <BeerListLoader />
-      ) : error ? (
-        <p>{error}</p>
+      ) : !beers.length ? (
+        <NotFound
+          className="no-item-message"
+          content={
+            <>
+              <div>No any item found!</div>
+            </>
+          }
+        />
       ) : (
         <Box sx={{ flexGrow: 1 }}>
           <Grid container spacing={4}>
@@ -53,8 +60,7 @@ const AllBeers = () => {
           </Grid>
         </Box>
       )}
-
-      {!!beers.length && enableLoadMore && !error && (
+      {!!beers.length && enableLoadMore && (
         <div className="text-center mt-2">
           {loading ? (
             <CircularProgress color="inherit" />

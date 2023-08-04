@@ -1,6 +1,7 @@
-import CssBaseline from "@mui/material/CssBaseline";
-import Container from "@mui/material/Container";
 import MainComponent from "./MainComponent";
+import Container from "@mui/material/Container";
+import Toast from "./components/common/toast/toast";
+import CssBaseline from "@mui/material/CssBaseline";
 
 function App() {
   return (
@@ -9,6 +10,7 @@ function App() {
       <Container maxWidth="md">
         <MainComponent />
       </Container>
+      <Toast />
     </main>
   );
 }

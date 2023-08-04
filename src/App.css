@@ -105,6 +105,7 @@
 .no-item-message a {
   cursor: pointer;
   color: blue;
+  text-decoration: none;
 }
 
 .beer-card-item {
@@ -131,4 +132,14 @@
 
 .MuiTooltip-tooltipArrow {
   background-color: black !important;
+}
+
+.click-to-add-button {
+  min-width: 0px !important;
+  padding: 0px !important;
+  font-weight: bold !important;
+}
+
+.click-to-add-button:hover {
+  background-color: transparent !important;
 }

@@ -13,7 +13,7 @@ function BeerCard({ beer }) {
   const { image_url, name, tagline, description, ingredients } = beer;
   const title = `Ingredients: ${Object.keys(ingredients).join(", ")}`;
   return (
-    <Grid item xs={6} md={12}>
+    <Grid item xs={12} md={12}>
       <Item className="beer-card-item">
         <Stack
           spacing={5}

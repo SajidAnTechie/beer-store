@@ -12,8 +12,10 @@ import {
   Grid,
 } from "@mui/material";
 import BeerCard from "../BeerCard/BeerCard";
+import { notify } from "../common/toast/toast";
 import { useTheme } from "@mui/material/styles";
 import BeerImage from "../../assets/images/beer.png";
+import NotFound from "../common/notFound/notFound";
 
 function getMyBeerFromStorage() {
   const getBeers = localStorage.getItem("myBeers");
@@ -54,6 +56,10 @@ const MyBeers = (props) => {
     const payload = [...getMyBeerFromStorage(), formData];
     localStorage.setItem("myBeers", JSON.stringify(payload));
     setMyBeers(payload);
+    notify({
+      data: "New item added successfully.",
+      statusType: "success",
+    });
     handleResetForm();
   };
 
@@ -74,12 +80,14 @@ const MyBeers = (props) => {
   useEffect(() => {
     const getMyBeers = getMyBeerFromStorage();
     setMyBeers(getMyBeers);
+    // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
     if (error) {
       setError(validateForm());
     }
+    // eslint-disable-next-line
   }, [formData]);
 
   const validateForm = () => {
@@ -99,18 +107,24 @@ const MyBeers = (props) => {
     return errors;
   };
 
+  function NotFoundContent() {
+    return (
+      <>
+        <div>Nothing to see yet</div>
+        <div>
+          <Button onClick={handleOpenModel} className="click-to-add-button">
+            Click here
+          </Button>{" "}
+          to add your first beer!
+        </div>
+      </>
+    );
+  }
+
   return (
     <>
       {!myBeers.length ? (
-        <div className="no-item-container d-flex justify-center">
-          <div className="no-item-message text-center">
-            <div>Nothing to see yet</div>
-            <div>
-              <a onClick={handleOpenModel}>Click here</a> to add your first
-              beer!
-            </div>
-          </div>
-        </div>
+        <NotFound className="no-item-message" content={<NotFoundContent />} />
       ) : (
         <Box sx={{ flexGrow: 1 }}>
           <Grid container spacing={4}>
@@ -133,7 +147,12 @@ const MyBeers = (props) => {
           <DialogContent>
             <DialogContentText>
               <Box className="form-image">
-                <img src={BeerImage} width={20} height={100} alt="Beer Image" />
+                <img
+                  src={BeerImage}
+                  width={20}
+                  height={100}
+                  alt="Trashy Blonde"
+                />
               </Box>
               <TextField
                 variant="outlined"

@@ -1,16 +1,23 @@
+import { notify } from "../components/common/toast/toast";
+
 /**
  *
  * @param {Object} err
  * @returns {String}
  */
 export const handleError = (err) => {
+  let msg = "Something went wrong!";
   if (err.response) {
     if (err.response.data.error) {
-      return err.response.data.error;
+      msg = err.response.data.error;
     } else {
-      return "Somethind went wrong!";
+      msg = "Something went wrong!";
     }
   } else {
-    return err.message;
+    msg = err.message;
   }
+  notify({
+    data: msg,
+    statusType: "error",
+  });
 };
