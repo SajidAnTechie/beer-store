@@ -1,5 +1,4 @@
-import { Box, Grid, Paper } from "@mui/material";
-import "react-loading-skeleton/dist/skeleton.css";
+import { Box, Grid } from "@mui/material";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 
 const BeerListLoader = () => {

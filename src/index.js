@@ -1,8 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
+import "./App.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
+import "react-tippy/dist/tippy.css";
+import "react-loading-skeleton/dist/skeleton.css";
 
 ReactDOM.render(
   <React.StrictMode>

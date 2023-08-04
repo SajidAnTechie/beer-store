@@ -1,3 +1,4 @@
+import { Tooltip } from "react-tippy";
 import { Paper, Grid, Stack } from "@mui/material";
 import { experimentalStyled as styled } from "@mui/material/styles";
 
@@ -9,19 +10,22 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 function BeerCard({ beer }) {
-  const { image_url, name, tagline, description } = beer;
+  const { image_url, name, tagline, description, ingredients } = beer;
+  const title = `Ingredients: ${Object.keys(ingredients).join(", ")}`;
   return (
     <Grid item xs={6} md={12}>
-      <Item>
+      <Item className="beer-card-item">
         <Stack
           spacing={5}
           direction="row"
           useFlexGap
           sx={{ marginLeft: "30px", color: "black", lineHeight: "22px" }}
         >
-          <div className="mt-3">
-            <img src={image_url} width={50} height={200} alt={name} />
-          </div>
+          <Tooltip title={title} arrow size="small">
+            <div className="mt-3 beer-image">
+              <img src={image_url} width={50} height={200} alt={name} />
+            </div>
+          </Tooltip>
           <div>
             <h1>{name}</h1>
             <h4>

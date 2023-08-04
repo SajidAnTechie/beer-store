@@ -15,56 +15,84 @@ import BeerCard from "../BeerCard/BeerCard";
 import { useTheme } from "@mui/material/styles";
 import BeerImage from "../../assets/images/beer.png";
 
+function getMyBeerFromStorage() {
+  const getBeers = localStorage.getItem("myBeers");
+  return getBeers ? JSON.parse(getBeers) : [];
+}
+
+const initialFormData = {
+  name: "",
+  genre: "",
+  description: "",
+  image_url: BeerImage,
+  ingredients: {
+    malt: "malt",
+    hops: "hops",
+    yeast: "yeast",
+  },
+};
+
 const MyBeers = (props) => {
-  const { handleCloseModel, isModelOpen } = props;
+  const { handleCloseModel, isModelOpen, handleOpenModel } = props;
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
-  const [genre, setGenre] = useState("");
+  const [formData, setFormData] = useState(initialFormData);
   const [error, setError] = useState(null);
-  const [beerName, setBeerName] = useState("");
-  const [description, setDescription] = useState("");
   const [myBeers, setMyBeers] = useState([]);
 
   const handleFormSubmit = () => {
     const errorsObject = validateForm();
-    if (!!Object.keys(errorsObject).length) {
+    const ObjectKeys = Object.keys(errorsObject);
+    if (!!ObjectKeys.length) {
+      const elementToFocus = document.getElementById(ObjectKeys[0]);
       setError(errorsObject);
+      elementToFocus.focus();
       return;
     } else {
-      setError(null);
+      error && setError(null);
     }
-    const getBeers = localStorage.getItem("myBeers");
-    const beers = getBeers ? JSON.parse(getBeers) : [];
-    const payload = [
-      ...beers,
-      {
-        name: beerName,
-        tagline: genre,
-        description,
-      },
-    ];
+    const payload = [...getMyBeerFromStorage(), formData];
     localStorage.setItem("myBeers", JSON.stringify(payload));
     setMyBeers(payload);
+    handleResetForm();
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((preFormData) => ({
+      ...preFormData,
+      [name]: value,
+    }));
+  };
+
+  const handleResetForm = () => {
+    setFormData(initialFormData);
+    error && setError(null);
     handleCloseModel();
   };
 
   useEffect(() => {
-    const getBeers = localStorage.getItem("myBeers");
-    const beers = getBeers ? JSON.parse(getBeers) : [];
-    setMyBeers(beers);
+    const getMyBeers = getMyBeerFromStorage();
+    setMyBeers(getMyBeers);
   }, []);
+
+  useEffect(() => {
+    if (error) {
+      setError(validateForm());
+    }
+  }, [formData]);
 
   const validateForm = () => {
     let errors = {};
-    if (!beerName) {
-      errors.beerName = true;
+    if (!formData.name) {
+      errors.name = true;
     }
 
-    if (!genre) {
+    if (!formData.genre) {
       errors.genre = true;
     }
 
-    if (!description) {
+    if (!formData.description) {
       errors.description = true;
     }
 
@@ -74,18 +102,20 @@ const MyBeers = (props) => {
   return (
     <>
       {!myBeers.length ? (
-        <p>No any item</p>
+        <div className="no-item-container d-flex justify-center">
+          <div className="no-item-message text-center">
+            <div>Nothing to see yet</div>
+            <div>
+              <a onClick={handleOpenModel}>Click here</a> to add your first
+              beer!
+            </div>
+          </div>
+        </div>
       ) : (
         <Box sx={{ flexGrow: 1 }}>
           <Grid container spacing={4}>
             {myBeers.map((beer, index) => (
-              <BeerCard
-                beer={{
-                  ...beer,
-                  image_url: beer.image_url ? beer.image_url : BeerImage,
-                }}
-                key={index}
-              />
+              <BeerCard beer={beer} key={index} />
             ))}
           </Grid>
         </Box>
@@ -111,13 +141,14 @@ const MyBeers = (props) => {
                 margin="normal"
                 required
                 fullWidth
-                id="beerName"
+                id="name"
                 label="Beer name"
-                name="beerName"
+                name="name"
+                autoComplete="name"
                 autoFocus
-                error={error?.beerName === true}
-                value={beerName}
-                onChange={(e) => setBeerName(e.target.value)}
+                error={error?.name === true}
+                value={formData.name}
+                onChange={handleChange}
               />
               <TextField
                 variant="outlined"
@@ -128,10 +159,11 @@ const MyBeers = (props) => {
                 id="genre"
                 label="Genre"
                 name="genre"
+                autoComplete="genre"
                 autoFocus
                 error={error?.genre === true}
-                value={genre}
-                onChange={(e) => setGenre(e.target.value)}
+                value={formData.genre}
+                onChange={handleChange}
               />
               <TextField
                 variant="outlined"
@@ -142,12 +174,13 @@ const MyBeers = (props) => {
                 id="description"
                 label="Description"
                 name="description"
+                autoComplete="description"
                 autoFocus
                 multiline
                 rows={5}
                 error={error?.description === true}
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
+                value={formData.description}
+                onChange={handleChange}
               />
             </DialogContentText>
           </DialogContent>
@@ -162,7 +195,7 @@ const MyBeers = (props) => {
             >
               <Button
                 autoFocus
-                onClick={handleCloseModel}
+                onClick={handleResetForm}
                 variant="text"
                 className="mr-3"
                 sx={{

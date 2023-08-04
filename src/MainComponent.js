@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Tab, Tabs, Button } from "@mui/material";
 import TabContent from "./components/tabs/TabContent";
 import { ALL_BEERS, MY_BEERS } from "./constants/appConstants";
+
 const MainComponent = () => {
   const [activeTab, setActiveTab] = useState(ALL_BEERS);
   const [isModelOpen, setModelOpen] = useState(false);
@@ -64,6 +65,7 @@ const MainComponent = () => {
       <TabContent
         CurrentTabValue={activeTab}
         handleCloseModel={handleCloseModel}
+        handleOpenModel={handleOpenModel}
         isModelOpen={isModelOpen}
       />
     </>

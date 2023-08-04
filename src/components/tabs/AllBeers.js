@@ -7,21 +7,21 @@ import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import BeerListLoader from "../Loader/BeerListLoader";
 
 const DEFAULT_PAGE = 1;
-const PER_PAGE_SIZE = 3;
+const PER_PAGE_ITEMS = 3;
 
 const AllBeers = () => {
   const [beers, setBeers] = useState([]);
-  const [page, setPage] = useState(DEFAULT_PAGE);
-  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [enableLoadMore, setLoadMore] = useState(true);
+  const [loading, setLoading] = useState(false);
+  const [page, setPage] = useState(DEFAULT_PAGE);
+  const [enableLoadMore, setEnableLoadMore] = useState(true);
 
   const fetchBeers = async (filters) => {
     try {
       setLoading(true);
       const data = await fetchAllBeers(filters);
-      if (data.length < PER_PAGE_SIZE) {
-        setLoadMore(false);
+      if (data.length < PER_PAGE_ITEMS) {
+        setEnableLoadMore(false);
       }
       setBeers([...beers, ...data]);
     } catch (err) {
@@ -35,7 +35,7 @@ const AllBeers = () => {
   useEffect(() => {
     fetchBeers({
       page,
-      perPage: PER_PAGE_SIZE,
+      per_page: PER_PAGE_ITEMS,
     });
   }, [page]);
   return (
