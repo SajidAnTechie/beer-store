@@ -11,7 +11,7 @@ import {
   TextField,
   Grid,
 } from "@mui/material";
-import BeerCard from "../BeerCard/BeerCard";
+import BeerCard from "../BeerCard";
 import { notify } from "../common/toast/toast";
 import { useTheme } from "@mui/material/styles";
 import NotFound from "../common/notFound/notFound";

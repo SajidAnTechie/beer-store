@@ -1,5 +1,5 @@
 import { useState } from "react";
-import TabContent from "./tabs/TabContent";
+import TabContent from "./Tabs/TabContent";
 import { Tab, Tabs, Button } from "@mui/material";
 import { ALL_BEERS, MY_BEERS } from "../constants/appConstants";
 

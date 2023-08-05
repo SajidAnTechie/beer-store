@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import BeerCard from "../BeerCard/BeerCard";
+import BeerCard from "../BeerCard";
 import { handleError } from "../../utils/error";
 import NotFound from "../common/notFound/notFound";
 import BeerListLoader from "../Loader/BeerListLoader";
