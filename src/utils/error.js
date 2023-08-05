@@ -1,18 +1,16 @@
 import { notify } from "../components/common/toast/toast";
 
+const GENERIC_ERROR = "Oops! Something went wrong";
+
 /**
  *
  * @param {Object} err
  * @returns {String}
  */
 export const handleError = (err) => {
-  let msg = "Something went wrong!";
+  let msg = GENERIC_ERROR;
   if (err.response) {
-    if (err.response.data.error) {
-      msg = err.response.data.error;
-    } else {
-      msg = "Something went wrong!";
-    }
+    msg = err?.response?.data?.error || GENERIC_ERROR;
   } else {
     msg = err.message;
   }

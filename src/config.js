@@ -1,6 +1,6 @@
 const config = {
-  baseURL: process.env.REACT_APP_API_BASE_URL,
-  apiEndPoint: {
+  baseUrl: process.env.REACT_APP_API_BASE_URL,
+  apiEndPoints: {
     beer: {
       fetchBeers: "/beers",
     },

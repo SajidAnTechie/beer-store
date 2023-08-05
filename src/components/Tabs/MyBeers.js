@@ -7,7 +7,6 @@ import {
   DialogContent,
   DialogContentText,
   DialogTitle,
-  useMediaQuery,
   TextField,
   Grid,
 } from "@mui/material";
@@ -37,7 +36,6 @@ const initialFormData = {
 const MyBeers = (props) => {
   const { handleCloseModel, isModelOpen, handleOpenModel } = props;
   const theme = useTheme();
-  const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
   const [formData, setFormData] = useState(initialFormData);
   const [error, setError] = useState(null);
   const [myBeers, setMyBeers] = useState([]);
@@ -129,14 +127,15 @@ const MyBeers = (props) => {
         <Box sx={{ flexGrow: 1 }}>
           <Grid container spacing={4}>
             {myBeers.map((beer, index) => (
-              <BeerCard beer={beer} key={index} />
+              <Grid item xs={12} md={12}>
+                <BeerCard beer={beer} key={index} />
+              </Grid>
             ))}
           </Grid>
         </Box>
       )}
       {isModelOpen && (
         <Dialog
-          fullScreen={fullScreen}
           fullWidth={true}
           open={isModelOpen}
           onClose={handleCloseModel}

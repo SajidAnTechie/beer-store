@@ -56,7 +56,9 @@ const AllBeers = () => {
         <Box sx={{ flexGrow: 1 }}>
           <Grid container spacing={4}>
             {beers.map((beer, index) => (
-              <BeerCard beer={beer} key={index} />
+              <Grid item xs={12} md={12}>
+                <BeerCard beer={beer} key={index} />
+              </Grid>
             ))}
           </Grid>
         </Box>

@@ -21,7 +21,7 @@ const MainComponent = () => {
 
   return (
     <>
-      <div className="d-flex flex-row flex-between align-items-center">
+      <div className="d-flex flex-row flex-between align-items-center tab-menu">
         <div>
           <Tabs
             indicatorColor="primary"
