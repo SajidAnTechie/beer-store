@@ -1,10 +1,12 @@
+import MyBeers from "./MyBeers";
 import AllBeers from "./AllBeers";
 import { ALL_BEERS, MY_BEERS } from "../../constants/appConstants";
-import MyBeers from "./MyBeers";
+
 const TabContent = (props) => {
-  const { CurrentTabValue, handleCloseModel, isModelOpen, handleOpenModel } = props;
+  const { CurrentTabValue, handleCloseModel, isModelOpen, handleOpenModel } =
+    props;
   return (
-    <div style={{ marginTop: "30px" }}>
+    <div style={{ marginTop: "17px" }}>
       {CurrentTabValue === ALL_BEERS && <AllBeers />}
       {CurrentTabValue === MY_BEERS && (
         <MyBeers

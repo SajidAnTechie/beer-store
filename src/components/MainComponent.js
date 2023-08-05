@@ -1,11 +1,11 @@
 import { useState } from "react";
+import TabContent from "./tabs/TabContent";
 import { Tab, Tabs, Button } from "@mui/material";
-import TabContent from "./components/tabs/TabContent";
-import { ALL_BEERS, MY_BEERS } from "./constants/appConstants";
+import { ALL_BEERS, MY_BEERS } from "../constants/appConstants";
 
 const MainComponent = () => {
-  const [activeTab, setActiveTab] = useState(ALL_BEERS);
   const [isModelOpen, setModelOpen] = useState(false);
+  const [activeTab, setActiveTab] = useState(ALL_BEERS);
 
   const handleOpenModel = () => {
     setModelOpen(true);
@@ -25,25 +25,33 @@ const MainComponent = () => {
         <div>
           <Tabs
             indicatorColor="primary"
-            TabIndicatorProps={{ style: { bottom: 0, borderTop: "none" } }}
+            TabIndicatorProps={{
+              style: { bottom: 0, borderTop: "none", display: "none" },
+            }}
             textColor="inherit"
             value={activeTab}
+            sx={{ fontWeight: "bold" }}
+            visibleScrollbar={false}
             onChange={handleChange}
           >
             <Tab
               label="All Beers"
               value={ALL_BEERS}
               id="allBeers"
-              style={{
+              sx={{
                 backgroundColor: "transparent",
+                fontWeight: "bold",
+                textTransform: "capitalize",
               }}
             />
             <Tab
               label="My Beers"
               value={MY_BEERS}
               id="myBeers"
-              style={{
+              sx={{
                 backgroundColor: "transparent",
+                fontWeight: "bold",
+                textTransform: "capitalize",
               }}
             />
           </Tabs>

@@ -17,16 +17,7 @@ const instance = axios.create({
  * access-token header
  * @returns {Promise}
  */
-function get(
-  url,
-  { params = {}, accessToken = false, responseType = "json", headers = {} } = {}
-) {
-  //   const authHeaders = {};
-
-  //   if (accessToken) {
-  //     authHeaders["Authorization"] = `Bearer ${tokenService.getAccessToken()}`;
-  //   }
-
+function get(url, { params = {}, responseType = "json", headers = {} } = {}) {
   return instance({
     url,
     params,

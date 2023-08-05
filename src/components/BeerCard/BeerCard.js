@@ -22,7 +22,7 @@ function BeerCard({ beer }) {
           sx={{ marginLeft: "30px", color: "black", lineHeight: "22px" }}
         >
           <Tooltip title={title} arrow size="small">
-            <div className="mt-3 beer-image">
+            <div className="mt-3">
               <img src={image_url} width={50} height={200} alt={name} />
             </div>
           </Tooltip>

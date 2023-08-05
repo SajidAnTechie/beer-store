@@ -38,6 +38,7 @@ const AllBeers = () => {
     });
     // eslint-disable-next-line
   }, [page]);
+
   return (
     <>
       {!beers.length && loading ? (
@@ -70,6 +71,7 @@ const AllBeers = () => {
               onClick={() => {
                 setPage((preState) => preState + 1);
               }}
+              sx={{ fontWeight: "bold" }}
             >
               Load More
             </Button>

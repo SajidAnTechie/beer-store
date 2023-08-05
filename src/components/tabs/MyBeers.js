@@ -14,8 +14,8 @@ import {
 import BeerCard from "../BeerCard/BeerCard";
 import { notify } from "../common/toast/toast";
 import { useTheme } from "@mui/material/styles";
-import BeerImage from "../../assets/images/beer.png";
 import NotFound from "../common/notFound/notFound";
+import BeerImage from "../../assets/images/beer.png";
 
 function getMyBeerFromStorage() {
   const getBeers = localStorage.getItem("myBeers");
@@ -110,7 +110,7 @@ const MyBeers = (props) => {
   function NotFoundContent() {
     return (
       <>
-        <div>Nothing to see yet</div>
+        <div>Nothing to see yet.</div>
         <div>
           <Button onClick={handleOpenModel} className="click-to-add-button">
             Click here
@@ -143,7 +143,9 @@ const MyBeers = (props) => {
           onClick={(e) => e.stopPropagation()}
           aria-labelledby="responsive-dialog-title"
         >
-          <DialogTitle id="responsive-dialog-title">Add a New Beer</DialogTitle>
+          <DialogTitle id="responsive-dialog-title" sx={{ fontWeight: "bold" }}>
+            Add a New Beer
+          </DialogTitle>
           <DialogContent>
             <DialogContentText>
               <Box className="form-image">
