@@ -128,7 +128,7 @@ const MyBeers = (props) => {
           <Grid container spacing={4}>
             {myBeers.map((beer, index) => (
               <Grid item xs={12} md={12}>
-                <BeerCard beer={beer} key={index} />
+                <BeerCard beer={{ ...beer, tagline: beer.genre }} key={index} />
               </Grid>
             ))}
           </Grid>
