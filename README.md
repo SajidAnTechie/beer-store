@@ -1,4 +1,5 @@
-# Getting Started with Create React App
+## Demo
+![Untitled](https://github.com/SajidAnTechie/beer-store/assets/59027889/4c761044-5638-4fe5-b596-8979781fbd8f)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
